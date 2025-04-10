@@ -32,7 +32,7 @@ function App() {
         <label>Cerca per genere</label>
         <div>
           <select value={searchGenre} onChange={event => setSearchGenre(event.target.value)}>
-            <option>---</option>
+            <option value=''>---</option>
             <option>Fantascienza</option>
             <option>Thriller</option>
             <option>Romantico</option>
