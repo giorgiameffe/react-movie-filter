@@ -5,41 +5,62 @@ import movies from './data/movies.js';
 
 function App() {
 
-  // useState che corrisponde all'array di oggetti
+  // useState iniziale che corrisponde all'array di oggetti
   const [moviesList, setMoviesList] = useState(movies);
-  // useState iniziale del campo select --> inizialmente è vuoto
+
+  // useState iniziale per selezione genere del film --> inizialmente è vuoto
   const [searchGenre, setSearchGenre] = useState('');
 
-  // useEffect per filtrare i film per genere
+  // useState iniziale per selezione titolo del film --> inizialmente è vuoto
+  const [searchMovieTitle, setSearchMovieTitle] = useState('');
+
+  // useEffect per filtrare i film per genere e per titolo
   useEffect(() => {
 
     let result = movies;
 
     if (searchGenre !== '') {
 
-      result = movies.filter(movie => movie.genre === searchGenre)
+      result = movies.filter(movie => movie.genre === searchGenre);
+    }
+
+    if (searchMovieTitle !== '') {
+
+      result = movies.filter(movie => {
+
+        const lowercaseTitle = movie.title.toLowerCase();
+        return lowercaseTitle.includes(searchMovieTitle);
+
+      })
     }
 
     setMoviesList(result);
 
-  }, [searchGenre])
+  }, [searchGenre, searchMovieTitle])
 
   return (
     <>
       <h1>Movie Blog</h1>
-
-      <section>
-        <label>Cerca per genere</label>
+      <div>
         <div>
-          <select value={searchGenre} onChange={event => setSearchGenre(event.target.value)}>
-            <option value=''>---</option>
-            <option>Fantascienza</option>
-            <option>Thriller</option>
-            <option>Romantico</option>
-            <option>Azione</option>
-          </select>
+          <label>Cerca per genere</label>
         </div>
-      </section>
+        <select value={searchGenre} onChange={event => setSearchGenre(event.target.value)}>
+          <option value=''>---</option>
+          <option>Fantascienza</option>
+          <option>Thriller</option>
+          <option>Romantico</option>
+          <option>Azione</option>
+        </select>
+      </div>
+
+
+      <div>
+        <div>
+          <label>Cerca per titolo</label>
+        </div>
+        <input type="text" value={searchMovieTitle} onChange={event => setSearchMovieTitle(event.target.value)} />
+      </div>
 
       {moviesList.map((movie, i) =>
         <section key={i}>
