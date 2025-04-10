@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react';
 // array di film
 import movies from '../data/movies.js';
 
-import MoviesList from './main-components/MoviesList.jsx';
-
 export default function Main() {
 
     // useState iniziale che corrisponde all'array di oggetti
@@ -52,10 +50,19 @@ export default function Main() {
                         <option>Romantico</option>
                         <option>Azione</option>
                     </select>
+
                     <label>Cerca per titolo</label>
                     <input type="text" value={searchMovieTitle} onChange={event => setSearchMovieTitle(event.target.value)} placeholder='Inserisci il titolo' />
                 </div>
-                <MoviesList movies={movies} />
+
+
+                <div className='raw'>
+                    {moviesList.map((movie, i) =>
+                        <section className='column' key={i}>
+                            <h3>{movie.title}</h3>
+                            <p>{movie.genre}</p>
+                        </section>)}
+                </div>
             </div>
         </main>
     );
