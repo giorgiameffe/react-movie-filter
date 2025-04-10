@@ -30,7 +30,8 @@ h1 {
 }
 
 input,
-select {
+select,
+.btn {
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #000000;
@@ -49,5 +50,22 @@ label {
 }
 
 .column {
-    width: calc((100% - 60px) / 3)
+    width: calc((100% - 60px) / 3);
+    margin-bottom: 40px;
+}
+
+.add-movie-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    background-color: #ffffff;
+    margin-left: 10px;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #e2ceaf;
 }
