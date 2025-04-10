@@ -1,0 +1,53 @@
+/* Reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    background-color: #ffebcd;
+    font-family: "Lora", serif;
+}
+
+h1 {
+    text-align: center;
+    margin: 40px 0px;
+
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Input */
+
+.input-container {
+    margin-bottom: 50px;
+}
+
+input,
+select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #000000;
+}
+
+label {
+    margin: 0px 10px;
+}
+
+/* Movie section */
+
+.raw {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.column {
+    width: calc((100% - 60px) / 3)
+}

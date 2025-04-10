@@ -40,33 +40,36 @@ function App() {
 
   return (
     <>
-      <h1>Movie Blog</h1>
-      <div>
-        <div>
-          <label>Cerca per genere</label>
+      <header>
+        <h1>Movie Blog</h1>
+      </header>
+
+      <main>
+        <div className='container'>
+          <div className='input-container'>
+            <label>Cerca per genere</label>
+            <select value={searchGenre} onChange={event => setSearchGenre(event.target.value)}>
+              <option value=''>---</option>
+              <option>Fantascienza</option>
+              <option>Thriller</option>
+              <option>Romantico</option>
+              <option>Azione</option>
+            </select>
+
+            <label>Cerca per titolo</label>
+            <input type="text" value={searchMovieTitle} onChange={event => setSearchMovieTitle(event.target.value)} placeholder='Inserisci il titolo' />
+          </div>
+
+
+          <div className='raw'>
+            {moviesList.map((movie, i) =>
+              <section className='column' key={i}>
+                <h3>{movie.title}</h3>
+                <p>{movie.genre}</p>
+              </section>)}
+          </div>
         </div>
-        <select value={searchGenre} onChange={event => setSearchGenre(event.target.value)}>
-          <option value=''>---</option>
-          <option>Fantascienza</option>
-          <option>Thriller</option>
-          <option>Romantico</option>
-          <option>Azione</option>
-        </select>
-      </div>
-
-
-      <div>
-        <div>
-          <label>Cerca per titolo</label>
-        </div>
-        <input type="text" value={searchMovieTitle} onChange={event => setSearchMovieTitle(event.target.value)} />
-      </div>
-
-      {moviesList.map((movie, i) =>
-        <section key={i}>
-          <h3>{movie.title}</h3>
-          <p>{movie.genre}</p>
-        </section>)}
+      </main>
     </>
   )
 }
