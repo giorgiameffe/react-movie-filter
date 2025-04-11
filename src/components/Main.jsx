@@ -8,8 +8,11 @@ export default function Main() {
     // useState iniziale che corrisponde all'array di oggetti
     const [moviesList, setMoviesList] = useState(movies);
 
+    //  useState iniziale per filtrare i film per genere e titolo
+    const [findMovies, setFindMovies] = useState(moviesList);
+
     // useState iniziale per selezione genere del film --> inizialmente è vuoto
-    const [searchGenre, setSearchGenre] = useState('');
+    const [searchMovieGenre, setSearchMovieGenre] = useState('');
 
     // useState iniziale per selezione titolo del film --> inizialmente è vuoto
     const [searchMovieTitle, setSearchMovieTitle] = useState('');
@@ -23,16 +26,16 @@ export default function Main() {
     // useEffect per filtrare i film per genere e per titolo
     useEffect(() => {
 
-        let result = movies;
+        let result = moviesList;
 
-        if (searchGenre !== '') {
+        if (searchMovieGenre !== '') {
 
-            result = movies.filter(movie => movie.genre === searchGenre);
+            result = result.filter(movie => movie.genre === searchMovieGenre);
         }
 
         if (searchMovieTitle !== '') {
 
-            result = movies.filter(movie => {
+            result = result.filter(movie => {
 
                 const lowercaseTitle = movie.title.toLowerCase();
                 return lowercaseTitle.includes(searchMovieTitle);
@@ -40,9 +43,9 @@ export default function Main() {
             })
         }
 
-        setMoviesList(result);
+        setFindMovies(result);
 
-    }, [searchGenre, searchMovieTitle])
+    }, [searchMovieGenre, searchMovieTitle, moviesList])
 
     // creazione nuovo film 
     const newFilm = {
@@ -63,7 +66,7 @@ export default function Main() {
             <div className='container'>
                 <div className='input-container'>
                     <label>Cerca per genere</label>
-                    <select value={searchGenre} onChange={event => setSearchGenre(event.target.value)}>
+                    <select value={searchMovieGenre} onChange={event => setSearchMovieGenre(event.target.value)}>
                         <option value=''>---</option>
                         <option>Fantascienza</option>
                         <option>Thriller</option>
@@ -80,7 +83,7 @@ export default function Main() {
                 </div>
 
                 <div className='raw'>
-                    {moviesList.map((movie, i) =>
+                    {findMovies.map((movie, i) =>
                         <section className='column' key={i}>
                             <h3>{movie.title}</h3>
                             <p>{movie.genre}</p>
